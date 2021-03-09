@@ -49,7 +49,8 @@ class OperacoesDeBoletoTest {
 		Pagamento pagamento = operacao.gerarPagamento(boletos);
 		fatura.pagarfatura(pagamento);
 
-		Assertions.assertEquals(fatura.getStatus(), FaturaStatus.PAGA);	}
+		Assertions.assertEquals(fatura.getStatus(), FaturaStatus.PAGA);
+	}
 
 	@Test
 	@DisplayName("Teste para boletos com valor inferior a fatura e pagos resultam em fatura pendente")
@@ -66,12 +67,23 @@ class OperacoesDeBoletoTest {
 		Pagamento pagamento = operacao.gerarPagamento(boletos);
 		fatura.pagarfatura(pagamento);
 
-		Assertions.assertEquals(fatura.getStatus(), FaturaStatus.PENDENTE);	}
+		Assertions.assertEquals(fatura.getStatus(), FaturaStatus.PENDENTE);
+	}
 
 	@Test
 	@DisplayName("Teste tipo de pagamento correto")
 	void TestaTipoDePagamento() {
-		Assertions.fail();
+		Fatura fatura = new Fatura(new Date(), 4000, "Caco Antibes");
+		Boleto boletoA = new Boleto(new Date(), 2000);
+
+		List<Boleto> boletos = new ArrayList<Boleto>();
+
+		boletos.add(boletoA);
+
+		Pagamento pagamento = operacao.gerarPagamento(boletos);
+
+		Assertions.assertEquals(pagamento.getMeioDePagamento(), MeioDePagamento.BOLETO);
+		Assertions.assertNotEquals(pagamento.getMeioDePagamento(), MeioDePagamento.CARTAO);
 	}
 
 }
