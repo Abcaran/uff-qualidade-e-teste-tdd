@@ -16,5 +16,4 @@ public class Pagamento {
 		return this.valorTotal;
 	}
 
-	public MeioDePagamento getMeioDePagamento() { return this.meioDePagamento; }
 }
